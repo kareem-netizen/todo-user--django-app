@@ -10,26 +10,24 @@ from .forms import TaskForm
 
 
 #----------Register----------
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
 def register_view(request):
 
     if request.method == "POST":
+        form = UserCreationForm(request.POST)
 
-        print(request.POST)
+        if form.is_valid():
+            user = form.save()
 
-        username = request.POST["username"]
-        password = request.POST["password"]
+            login(request, user)
 
-        user = User.objects.create_user(
-            username=username,
-            password=password
-        )
+            return redirect("task_list")
 
-        login(request, user)
+    else:
+        form = UserCreationForm()
 
-        return redirect("task_list")
-
-    return render(request, "register.html")
+    return render(request, "register.html", {"form": form})
 
 
 
