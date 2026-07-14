@@ -31,7 +31,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    "todo-user-django-app.onrender.com"
+    "todo-user-django-app.onrender.com",
 ]
 LOGIN_URL = "/login/"
 
